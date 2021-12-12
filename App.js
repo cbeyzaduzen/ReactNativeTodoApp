@@ -22,6 +22,12 @@ export default function App() {
     setTask(null);
   };
 
+  const completeTask = index => {
+    let itemsCopy = [...taskItems];
+    itemsCopy.splice(index, 1);
+    setTaskItems(itemsCopy);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -32,10 +38,13 @@ export default function App() {
 
           {/* TASK ITEMS LIST HERE */}
 
-          {taskItems.map((item,index) => {
-           return <Task key={index} text={item} />;
+          {taskItems.map((item, index) => {
+            return (
+              <TouchableOpacity key={index} onPress={() => completeTask(index)}>
+                <Task text={item} />
+              </TouchableOpacity>
+            );
           })}
-
         </View>
       </View>
 
