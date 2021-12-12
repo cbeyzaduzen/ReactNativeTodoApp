@@ -1,5 +1,14 @@
 import React from 'react';
-import {SafeAreaView, View, Text, StyleSheet} from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 import Task from './components/Task';
 
 export default function App() {
@@ -8,14 +17,28 @@ export default function App() {
       <View>
         {/* TODAY TASK */}
         <View style={styles.taskWrapper}>
-
           <Text style={styles.sectionTitle}>Today's Tasks</Text>
 
           <View style={styles.items}></View>
-          <Task text={"Task 1"} />
-          <Task text={"Task 2"} />
+          <Task text={'Task 1'} />
+          <Task text={'Task 2'} />
         </View>
       </View>
+
+      {/* WRITE A TASK*/}
+
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.writeTaskWrapper}>
+        <TextInput
+          style={styles.input}
+          placeholder={'Write a Task'}></TextInput>
+        <TouchableOpacity>
+          <View style={styles.addWrapper}>
+            <Text style={styles.addText}>+</Text>
+          </View>
+        </TouchableOpacity>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
@@ -32,9 +55,42 @@ const styles = StyleSheet.create({
   },
 
   sectionTitle: {
-    fontSize:24,
-    fontWeight:'bold',
+    fontSize: 24,
+    fontWeight: 'bold',
   },
 
-  items: {},
+  items: {
+    marginTop: 30,
+  },
+
+  writeTaskWrapper: {
+    position: 'absolute',
+    bottom: 60,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+
+  input: {
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    backgroundColor: '#FFF',
+    borderRadius: 60,
+    borderColor: '#C0C0C0',
+    borderWidth: 1,
+    width: 250,
+  },
+
+  addWrapper: {
+    width: 60,
+    height: 60,
+    backgroundColor: '#FFF',
+    borderRadius: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: '#C0C0C0',
+    borderWidth: 1,
+  },
+  addText: {},
 });
